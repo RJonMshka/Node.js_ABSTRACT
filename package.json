@@ -1,0 +1,19 @@
+{
+  "name": "node.js_abstract",
+  "version": "1.0.0",
+  "description": "JS and Node.js learning experience",
+  "main": "index.js",
+  "scripts": {
+    "tuts": "node ./Tuts/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RJonMshka/Node.js_ABSTRACT.git"
+  },
+  "author": "Rajat Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RJonMshka/Node.js_ABSTRACT/issues"
+  },
+  "homepage": "https://github.com/RJonMshka/Node.js_ABSTRACT#readme"
+}
