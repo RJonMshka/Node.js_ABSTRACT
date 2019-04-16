@@ -12,7 +12,7 @@ const http = require('http');
 
 
 // With anonymous function
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
     console.log(req);
 });
 
