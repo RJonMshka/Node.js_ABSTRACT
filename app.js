@@ -14,6 +14,24 @@ const http = require('http');
 // http.createServer return a Server
 const server = http.createServer((req, res) => {
     console.log(req.url, req.method, req.headers);
+    // Res does not hold any important data
+    // Instead we use it to fill it with data we wanna send back
+
+    // Setting a new response header
+    // We are telling the browser that we are sending content of type html (meta info)
+    res.setHeader('Content-Type', 'text/html');
+
+    // Now sending html data
+    // res.write works in chunks
+    res.write('<html>');
+    res.write('<head><title>HAHA</title></head>');
+    res.write('<body><h1>Hello From Node.js</h1></body>');
+    res.write('</html>');
+
+    // After we set all the headers and wrote all data to response body, we have to tell nodejs that we are done writing response data, now we want to send it to the browser back
+    // We call end
+    res.end();
+    // After this if we write anything to res it will give us error as res is sent back to client
 });
 
 // Server has a bunch of methods to call, one of them is listen
