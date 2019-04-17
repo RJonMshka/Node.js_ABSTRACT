@@ -13,7 +13,7 @@ const http = require('http');
 
 // http.createServer return a Server
 const server = http.createServer((req, res) => {
-    console.log(req);
+    console.log(req.url, req.method, req.headers);
 });
 
 // Server has a bunch of methods to call, one of them is listen
