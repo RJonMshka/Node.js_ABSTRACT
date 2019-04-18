@@ -20,8 +20,31 @@ const server = http.createServer((req, res) => {
         return res.end();
     }
     if(url === '/message' && method === 'POST') {
-        // writeFileSync takes 1st arg as Path to the file, 2nd arg as data to be stored in that file
-        fs.writeFileSync('message.txt','DUMMY');
+        // Incoming data however is sent as a stream of data
+        // Registering event listener for req data as node is event based
+        const body = [];
+        // This will be fired when chunks of data are sent from client
+        req.on('data', (chunk) => {
+            console.log(chunk);
+            body.push(chunk);
+        });
+
+        // This will be fired when done parsing incoming request data or incoming request in general
+        req.on('end', () => {
+            // Create a new buffer and add req chunks to it
+            const parsedBody = Buffer.concat(body).toString();
+            // toString is used as we know that we are sending string data from client
+            console.log(parsedBody);
+            const message = parsedBody.split('=')[1];
+
+            // writeFileSync takes 1st arg as Path to the file, 2nd arg as data to be stored in that file
+            fs.writeFileSync('message.txt', message);
+        });
+
+
+
+        
+        
         // res.writeHead allows us to write some meta info in one go. 1st arg is statusCode and other is an object with key value pair signifying headers you want to send in response object
         // res.writeHead(302, {});
 
