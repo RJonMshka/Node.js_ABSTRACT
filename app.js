@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
         });
 
         // This will be fired when done parsing incoming request data or incoming request in general
-        req.on('end', () => {
+        return req.on('end', () => {
             // Create a new buffer and add req chunks to it
             const parsedBody = Buffer.concat(body).toString();
             // toString is used as we know that we are sending string data from client
@@ -38,21 +38,26 @@ const server = http.createServer((req, res) => {
             const message = parsedBody.split('=')[1];
 
             // writeFileSync takes 1st arg as Path to the file, 2nd arg as data to be stored in that file
-            fs.writeFileSync('message.txt', message);
+            //fs.writeFileSync('message.txt', message);
+
+            // Write file Sync is a blocking statement
+            // to avoid it, we use fs.writeFile
+            // It accepts path, data and a 3rd argument - callback (function which will be executed when writing to file is done)
+            // This callback has error as 1st argument, which will be NULL if no error
+            fs.writeFile('message.txt', message, (err) => {
+                // Can do error handling on basis of error
+
+                // res.writeHead allows us to write some meta info in one go. 1st arg is statusCode and other is an object with key value pair signifying headers you want to send in response object
+                // res.writeHead(302, {});
+
+                // OR you can break it down like this
+                res.statusCode = 302;
+                // 302 is for REDIRECTION
+                res.setHeader('Location', '/');
+                return res.end();
+            });
         });
 
-
-
-        
-        
-        // res.writeHead allows us to write some meta info in one go. 1st arg is statusCode and other is an object with key value pair signifying headers you want to send in response object
-        // res.writeHead(302, {});
-
-        // OR you can break it down like this
-        res.statusCode = 302;
-        // 302 is for REDIRECTION
-        res.setHeader('Location', '/');
-        return res.end();
     }
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
