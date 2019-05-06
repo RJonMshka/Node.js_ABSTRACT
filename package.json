@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RJonMshka/Node.js_ABSTRACT/issues"
   },
-  "homepage": "https://github.com/RJonMshka/Node.js_ABSTRACT#readme"
+  "homepage": "https://github.com/RJonMshka/Node.js_ABSTRACT#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
