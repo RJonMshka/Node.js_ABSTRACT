@@ -4,7 +4,8 @@
   "description": "JS and Node.js learning experience",
   "main": "index.js",
   "scripts": {
-    "tuts": "node ./Tuts/index.js"
+    "tuts": "node ./Tuts/index.js",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/RJonMshka/Node.js_ABSTRACT#readme",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }
