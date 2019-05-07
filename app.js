@@ -1,7 +1,4 @@
-// Root file
-// Server file of node app
-// Server will run from here
-const http = require('http');
+
 
 const express = require('express');
 
@@ -22,7 +19,13 @@ app.use( (req, res, next) => {
     next(); // Allows request tocontinue to the next middleware in line
 });
 
-app.use( (req, res, next) => {
+app.use('/add', (req, res, next) => {
+    res.send('<h1>Add product Page</h1>');
+});
+
+// Path does n't mean full path but the start of the path of our request
+// So '/' path matches all requests, as all requests will have / at beginning
+app.use('/', (req, res, next) => {
     console.log('In another middleware Now!!!');
     // Can set header manuaaly as well and override the default express header setting
 
@@ -31,10 +34,7 @@ app.use( (req, res, next) => {
     res.send('<h1>Hello From Express!!</h1>');
 });
 
-// app also happens to be a valid request handler
-const server = http.createServer(app);
-
-server.listen(3000);
-
+// Starting & Listening to the server
+app.listen(3000);
  
 
