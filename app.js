@@ -6,25 +6,22 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+const adminRouter = require('./routes/admin');
+const  shopRouter = require('./routes/shop');
+
 // Body parser for forms
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use( (req, res, next) => {
-    console.log('In the middleware Now!!!');
-    next(); 
-});
+// USe admin Router
+// Filter admin requests
+app.use('/admin', adminRouter);
 
-app.use('/add', (req, res, next) => {
-    res.send('<form action="/users" method="POST"><input type="text" name="username"/><button type="submit">ADD ME</button></form>');
-});
+// Use Shop Router
+app.use(shopRouter); 
 
-app.post('/users', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
-
-app.use('/', (req, res, next) => {
-    res.send('<h1>Hello From Express!!</h1>');
+app.use((req, res, next) => {
+    // Can chain methods like below
+    res.status(404).send('<h1>Page Not Found</h1>');
 });
 
 // Starting & Listening to the server
