@@ -24,9 +24,10 @@ app.use( (req, res, next) => {
 
 app.use( (req, res, next) => {
     console.log('In another middleware Now!!!');
+    // Can set header manuaaly as well and override the default express header setting
 
     // Send  allows us to send a response
-    // Automatically sets content-type HTML
+    // Automatically sets content-type HTML 
     res.send('<h1>Hello From Express!!</h1>');
 });
 
