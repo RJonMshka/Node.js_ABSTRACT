@@ -2,6 +2,8 @@ const path = require('path');
 
 const express = require('express');
 
+const rootDir = require('../utils/path');
+
 // Express Router
 // Its like a mini-express app tied to other express app (plugable)
 const router = express.Router();
@@ -16,7 +18,7 @@ router.get('/', (req, res, next) => {
     // We will use first segment as "__dirname" which is a global variable available to us by Node.js
     // __dirname gives us an absolute path from OS root to this project folder
     // Works in both linux systems and windows systems 
-    res.sendFile(path.join(__dirname, '..','views', 'shop.html'));
+    res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 });
 
 module.exports = router;
