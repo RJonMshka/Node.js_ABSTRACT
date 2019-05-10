@@ -5,9 +5,17 @@ const path = require('path');
 
 // Now you create an express application and store it in a variable by calling express as a function
 const app = express();
+
+// We can set express configurations by using app.set (docs)
+app.set('view engine', 'pug');
+
+// Have to tell where are our views located (i.e. views folder), "views" by default
+app.set('views', 'views');
+
+
 const bodyParser = require('body-parser');
 
-const adminRouter = require('./routes/admin');
+const adminData = require('./routes/admin');
 const  shopRouter = require('./routes/shop');
 
 // Body parser for forms
@@ -20,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // USe admin Router
 // Filter admin requests
-app.use('/admin', adminRouter);
+app.use('/admin', adminData.routes);
 
 // Use Shop Router
 app.use(shopRouter); 

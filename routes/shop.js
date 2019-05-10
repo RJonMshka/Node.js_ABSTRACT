@@ -4,21 +4,18 @@ const express = require('express');
 
 const rootDir = require('../utils/path');
 
+const adminData = require('./admin');
+
 // Express Router
 // Its like a mini-express app tied to other express app (plugable)
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    // Wrong path as this absolute path reflects path of system directory(OS)
-    // To solve this we use core module of node.js called "path"
-    // res.sendFile('/views/shop.html');
-
-    // We use path.join()
-    // It return a path made out of different segments
-    // We will use first segment as "__dirname" which is a global variable available to us by Node.js
-    // __dirname gives us an absolute path from OS root to this project folder
-    // Works in both linux systems and windows systems 
-    res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+    // We use res.render
+    // No need to do .pug as we already specified in app that we are using pug for templating
+    // Also no need to specify path as we already specified it in app.js
+    const products = adminData.products;
+    res.render('shop', {prods: products, docTitle: "Shop"});
 });
 
 module.exports = router;
