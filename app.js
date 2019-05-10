@@ -1,6 +1,7 @@
 
 
 const express = require('express');
+const path = require('path');
 
 // Now you create an express application and store it in a variable by calling express as a function
 const app = express();
@@ -21,7 +22,7 @@ app.use(shopRouter);
 
 app.use((req, res, next) => {
     // Can chain methods like below
-    res.status(404).send('<h1>Page Not Found</h1>');
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
 // Starting & Listening to the server

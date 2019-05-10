@@ -1,16 +1,17 @@
 const express = require('express');
+const path = require('path');
 
 // Express Router
 // Its like a mini-express app tied to other express app (plugable)
 const router = express.Router();
 
 // /admin/add-products => GET
-router.get('/add-products', (req, res, next) => {
-    res.send('<form action="/admin/add-products" method="POST"><input type="text" name="username"/><button type="submit">ADD ME</button></form>');
+router.get('/add-product', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
 });
 
 // /admin/add-products => POST
-router.post('/add-products', (req, res, next) => {
+router.post('/add-product', (req, res, next) => {
     console.log(req.body);
     res.redirect('/');
 });
