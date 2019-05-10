@@ -13,6 +13,11 @@ const  shopRouter = require('./routes/shop');
 // Body parser for forms
 app.use(bodyParser.urlencoded({extended: false}));
 
+// To Serve static files (Read Only)
+// It tries to find any request needing a file (.js, .css or any file) and redirect it to public folder
+// We can add multiple static paths, request will funnel throiugh them unless it founds its first hit
+app.use(express.static(path.join(__dirname, 'public')));
+
 // USe admin Router
 // Filter admin requests
 app.use('/admin', adminRouter);
