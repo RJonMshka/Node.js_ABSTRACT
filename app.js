@@ -35,7 +35,7 @@ app.use(shopRouter);
 
 app.use((req, res, next) => {
     // Can chain methods like below
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', {pageHeading: "Page Not Found !!!!!!!!", pageTitle: "Page Not Found"})
 });
 
 // Starting & Listening to the server
