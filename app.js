@@ -6,8 +6,25 @@ const path = require('path');
 // Now you create an express application and store it in a variable by calling express as a function
 const app = express();
 
+// Express Handlebars
+const expressHbs = require('express-handlebars');
+
+// Tell Express to use express-handlebars for templating
+// We can use any name here, but it should not clash with another view engine
+// Extname is for layouts
+app.engine(
+    'handlebars',
+    expressHbs(
+        {
+            layoutsDir : 'views/layouts/',
+            defaultLayout: 'main-layout',
+            extname: 'handlebars'
+        }
+    )   
+);
+
 // We can set express configurations by using app.set (docs)
-app.set('view engine', 'pug');
+app.set('view engine', 'handlebars');
 
 // Have to tell where are our views located (i.e. views folder), "views" by default
 app.set('views', 'views');

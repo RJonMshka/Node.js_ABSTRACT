@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
     // No need to do .pug as we already specified in app that we are using pug for templating
     // Also no need to specify path as we already specified it in app.js
     const products = adminData.products;
-    res.render('shop', {prods: products, pageTitle: "Shop", path: "/"});
+    res.render('shop', {prods: products, pageTitle: "Shop", path: "/", hasProducts: products.length > 0, activeShop: true, productCSS: true});
 });
 
 module.exports = router;
